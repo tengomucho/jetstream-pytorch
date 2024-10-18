@@ -38,6 +38,7 @@ class QuantizationConfig:
   enable_activation_quantization: bool = False
   enable_kv_quantization: bool = False
   exclude_layers: Union[None, List[str]] = None
+  exclude_embeddings: bool = False
 
 
 @dataclasses.dataclass

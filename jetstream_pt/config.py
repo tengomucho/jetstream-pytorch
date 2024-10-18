@@ -54,6 +54,11 @@ flags.DEFINE_multi_string(
     None,
     "List of layer names to exclude from quantization",
 )
+flags.DEFINE_bool(
+    "quantize_exclude_embeddings",
+    False,
+    "Exclude embeddings from quantization",
+)
 
 _VALID_QUANTIZATION_TYPE = {
     "int8_per_channel",
@@ -184,6 +189,7 @@ def create_quantization_config_from_flags():
 
   config.enable_activation_quantization = FLAGS.quantize_activation
   config.exclude_layers = FLAGS.quantize_exclude_layers
+  config.exclude_embeddings = FLAGS.quantize_exclude_embeddings
   config.enable_kv_quantization = (
       FLAGS.quantize_kv_cache
       if FLAGS.quantize_kv_cache is not None

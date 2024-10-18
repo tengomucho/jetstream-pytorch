@@ -20,7 +20,9 @@ def quantize_model(float_model, config: QuantizationConfig):
         new_mod = mod.get_quantized_version()
       elif isinstance(mod, torch.nn.Linear):
         new_mod = create_quantized_from_nn_linear(mod, config)
-      elif isinstance(mod, torch.nn.Embedding):
+      elif (
+          isinstance(mod, torch.nn.Embedding) and not config.exclude_embeddings
+      ):
         new_mod = create_quantized_from_nn_embedding(mod, config)
 
       if new_mod:
